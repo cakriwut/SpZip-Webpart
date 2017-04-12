@@ -32,116 +32,7 @@ export default class SpZipLibWebPart extends BaseClientSideWebPart<ISpZipLibWebP
           return listItemData;
         }) as Promise<ISPListItems>;    
   }
-  
-  private _renderList(items: ISPListItem[]): void{
-     let html: string = '';
-     items.forEach((item: ISPListItem) => {
-        html += `
-          <ul>
-            <li>
-              <a href="${item.ServerRelativeUrl}">${item.Name}</a>   
-                <button class="download-Button" data-itemid="${item.Id}">
-                  <span class="${styles.label}">Download zip</span>
-                </button>
-            </li>
-          </ul>
-        `;
-     }); 
-     
-     const listContainer : Element = this.domElement.querySelector("#listContainer");
-     listContainer.innerHTML = html;
-     //this._setButtonEventHandler();
-  }
 
-  private _setButtonEventHandler():void{
-    const webPart: SpZipLibWebPart = this;
-    jQuery("#listContainer",this.domElement).on("click","button.download-Button",(source) =>  { webPart.downloadZip(source); });
-  }
-
-  private downloadZip(source: JQueryEventObject): void{
-    var itemID:string = jQuery(source.currentTarget).data("itemid");
-    var azureUrl : string = this.properties.azureFunction;
-    azureUrl += "&siteUrl=" + this.context.pageContext.web.absoluteUrl;
-    azureUrl += "&listTitle=" + this.properties.library;
-    azureUrl += "&itemId=" + itemID;
-
-    window.location.href = azureUrl; 
-  }
-
-  private _renderListAsync() : void{
-     this._getMockListData().then((response) => {
-        this._renderList(response.value);
-     });
-  }
-
-  public render(): void {
-    this.domElement.innerHTML = `
-      <div class="${styles.helloWorld}">
-        <div class="${styles.container}">
-          <div class="ms-Grid-row ms-bgColor-themeDark ms-fontColor-white ${styles.row}">
-            <div class="ms-Grid-col ms-u-lg10 ms-u-xl8 ms-u-xlPush2 ms-u-lgPush1">
-              <span class="ms-font-xl ms-fontColor-white">Welcome to SharePoint!</span>
-              <p class="ms-font-l ms-fontColor-white">Customize SharePoint experiences using Web Parts.</p>
-              <p class="ms-font-l ms-fontColor-white">${escape(this.properties.description)}</p>
-              <a href="https://aka.ms/spfx" class="${styles.button}">
-                <span class="${styles.label}">Learn more</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>`;
-  }
-
-  protected get dataVersion(): Version {
-    return Version.parse('1.0');
-  }
-
-  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    return {
-      pages: [
-        {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
-          groups: [
-            {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
-    };
-  }
-}
-
-
-//
-/*
-public render(): void {
-    this.domElement.innerHTML = `
-      <div class="${styles.helloWorld}">
-        <div class="${styles.container}">
-          <div class="ms-Grid-row ms-bgColor-themeDark ms-fontColor-white ${styles.row}">
-            <div class="ms-Grid-col ms-u-lg10 ms-u-xl8 ms-u-xlPush2 ms-u-lgPush1">
-              <span class="ms-font-xl ms-fontColor-white">Welcome to SharePoint!</span>
-            </div>
-          </div>
-          <div class="ms-Grid-row>
-            <div class="ms-Grid-col ms-u-lg12>
-              <div id='listContainer'></div>
-            </div>
-          </div>
-        </div>
-      </div>`;
-
-     this._renderListAsync();     
- }
- 
   private _getListData() : Promise<ISPListItems>{
   
     var restUrl : string = this.context.pageContext.web.absoluteUrl;
@@ -171,7 +62,42 @@ public render(): void {
     });
   }
   
- private _renderListAsync() : void{
+  private _renderList(items: ISPListItem[]): void{
+     let html: string = '';
+     items.forEach((item: ISPListItem) => {
+        html += `
+          <ul>
+            <li>
+              <a href="${item.ServerRelativeUrl}">${item.Name}</a>   
+                <button class="download-Button" data-itemid="${item.Id}">
+                  <span class="${styles.label}">Download zip</span>
+                </button>
+            </li>
+          </ul>
+        `;
+     }); 
+     
+     const listContainer : Element = this.domElement.querySelector("#listContainer");
+     listContainer.innerHTML = html;
+     this._setButtonEventHandler();
+  }
+
+  private _setButtonEventHandler():void{
+    const webPart: SpZipLibWebPart = this;
+    jQuery("#listContainer",this.domElement).on("click","button.download-Button",(source) =>  { webPart.downloadZip(source); });
+  }
+
+  private downloadZip(source: JQueryEventObject): void{
+    var itemID:string = jQuery(source.currentTarget).data("itemid");
+    var azureUrl : string = this.properties.azureFunction;
+    azureUrl += "&siteUrl=" + this.context.pageContext.web.absoluteUrl;
+    azureUrl += "&listTitle=" + this.properties.library;
+    azureUrl += "&itemId=" + itemID;
+
+    window.location.href = azureUrl; 
+  }
+
+  private _renderListAsync() : void{
     if(Environment.type === EnvironmentType.Local ) {
       this._getMockListData().then((response) => {
         this._renderList(response.value);
@@ -185,4 +111,51 @@ public render(): void {
       });
     }
   }
-*/
+
+  public render(): void {
+    this.domElement.innerHTML = `
+      <div class="${styles.helloWorld}">
+        <div class="${styles.container}">
+          <div class="ms-Grid-row ms-bgColor-themeDark ms-fontColor-white ${styles.row}">
+            <div class="ms-Grid-col ms-u-lg10 ms-u-xl8 ms-u-xlPush2 ms-u-lgPush1">
+              <span class="ms-font-xl ms-fontColor-white">Welcome to SharePoint!</span>
+            </div>
+          </div>
+          <div class="ms-Grid-row>
+            <div class="ms-Grid-col ms-u-lg12>
+              <div id='listContainer'></div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+     this._renderListAsync();     
+ }
+ 
+
+  protected get dataVersion(): Version {
+    return Version.parse('1.0');
+  }
+
+  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+    return {
+      pages: [
+        {
+          header: {
+            description: strings.PropertyPaneDescription
+          },
+          groups: [
+            {
+              groupName: strings.BasicGroupName,
+              groupFields: [
+                PropertyPaneTextField('description', {
+                  label: strings.DescriptionFieldLabel
+                })
+              ]
+            }
+          ]
+        }
+      ]
+    };
+  }
+}
