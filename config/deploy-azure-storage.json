@@ -1,0 +1,6 @@
+{
+  "workingDir": "./temp/deploy/",
+  "account": "<!-- STORAGE ACCOUNT NAME -->",
+  "container": "sp-zip-webpart",
+  "accessKey": "<!-- ACCESS KEY -->"
+}

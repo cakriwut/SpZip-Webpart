@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "name": "sp-zip-webpart-client-side-solution",
+    "id": "9095ba37-84c7-419a-97dd-2f8686d74687",
+    "version": "1.0.0.0"
+  },
+  "paths": {
+    "zippedPackage": "solution/sp-zip-webpart.sppkg"
+  }
+}

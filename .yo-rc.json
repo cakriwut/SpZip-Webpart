@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "libraryName": "sp-zip-webpart",
+    "framework": "none",
+    "version": "1.0.0",
+    "libraryId": "9095ba37-84c7-419a-97dd-2f8686d74687"
+  }
+}

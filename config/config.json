@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "entry": "./lib/webparts/spZipLib/SpZipLibWebPart.js",
+      "manifest": "./src/webparts/spZipLib/SpZipLibWebPart.manifest.json",
+      "outputPath": "./dist/sp-zip-lib.bundle.js"
+    }
+  ],
+  "externals": {},
+  "localizedResources": {
+    "spZipLibStrings": "webparts/spZipLib/loc/{locale}.js"
+  }
+}
