@@ -1,4 +1,4 @@
-import { Version } from '@microsoft/sp-core-library';
+﻿import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
@@ -150,7 +150,13 @@ export default class SpZipLibWebPart extends BaseClientSideWebPart<ISpZipLibWebP
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
-                })
+                  }),
+                PropertyPaneTextField('library', {
+                      label: "Document Library"
+                  }),
+                PropertyPaneTextField('azureFunction', {
+                      label: "Azure Function URL"
+                  })
               ]
             }
           ]
