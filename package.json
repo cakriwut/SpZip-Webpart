@@ -9,7 +9,9 @@
     "@microsoft/sp-client-base": "~1.0.0",
     "@microsoft/sp-core-library": "~1.0.0",
     "@microsoft/sp-webpart-base": "~1.0.0",
-    "@types/webpack-env": ">=1.12.1 <1.14.0"
+    "@types/jquery": "^2.0.41",
+    "@types/webpack-env": ">=1.12.1 <1.14.0",
+    "jquery": "^3.2.1"
   },
   "devDependencies": {
     "@microsoft/sp-build-web": "~1.0.0",

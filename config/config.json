@@ -6,7 +6,9 @@
       "outputPath": "./dist/sp-zip-lib.bundle.js"
     }
   ],
-  "externals": {},
+  "externals": {
+    "jquery":"node_modules/jquery/dist/jquery.min.js"
+  },
   "localizedResources": {
     "spZipLibStrings": "webparts/spZipLib/loc/{locale}.js"
   }
